@@ -1,17 +1,19 @@
-﻿namespace Domain.Aggregates.UserAggregate
+﻿using Domain.Common;
+
+namespace Domain.Aggregates.UserAggregate
 {
-    public class User
+
+    public class User : Entity
     {
-        public Guid Id { get; private set; }
         public string Name { get; private set; }
         public string Email { get; private set; }
 
-        private User(string name, string email)
+        public User(string name, string email)
         {
-            Id = Guid.NewGuid();
             Name = name;
             Email = email;
         }
+        private User() { }
 
         public static User Create(string name, string email)
         {

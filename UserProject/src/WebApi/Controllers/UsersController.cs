@@ -48,21 +48,10 @@ namespace WebApi.Controllers
             return CreatedAtAction(nameof(GetUserById), new { id = result.Id }, result);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UpdateUserCommand command)
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command)
         {
-            if (id != command.Id)
-            {
-                return BadRequest("ID in URL and body do not match.");
-            }
-
             var result = await _mediator.Send(command);
-
-            if (result == null)
-            {
-                return NotFound();
-            }
-
             return Ok(result);
         }
 

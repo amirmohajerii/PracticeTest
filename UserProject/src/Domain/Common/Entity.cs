@@ -4,8 +4,6 @@
     {
         public Guid Id { get; protected set; }
 
-        // A protected parameterless constructor is required for serialization and EF Core.
-        // It's now accessible to inheriting classes.
         protected Entity() { }
 
         protected Entity(Guid id)

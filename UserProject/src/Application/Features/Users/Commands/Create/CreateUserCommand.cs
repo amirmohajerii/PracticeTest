@@ -25,7 +25,10 @@ namespace Application.Features.Users.Commands.Create
 
         public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var user = User.Create(request.Name, request.Email);
+            var newUserId = Guid.NewGuid();
+
+            var user = User.Create(newUserId, request.Name, request.Email);
+
             await _userRepository.AddAsync(user);
 
             await _cachingService.RemoveAsync("all_users_cache_key");
